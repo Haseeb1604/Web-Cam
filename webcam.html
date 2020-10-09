@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebCam</title>
+    <!-- https://github.com/jhuckaby/webcamjs  download webcam library files from link and add it your project -->
+    <script src="webcamjs-master/webcam.min.js"></script>
+    <style>
+        #location{ 
+            width: 500px;
+            height: 240px;
+            padding:20px; 
+            border:1px solid; 
+            background:#ccc; 
+            align-items: center;
+            margin: 0 auto;
+        }
+        .Snapshot{
+            margin: 8px auto;
+            width: 130px;
+        }
+        button{
+            width: 140px;
+            height: 5vh;
+            border-radius: 20px;
+            font-size: 16px;
+            text-shadow: -2px 2px 2px rgb(194, 170, 104);
+            background-color: #5D4954;
+            color: whitesmoke;
+            box-shadow: -2px 2px 2px rgb(102, 97, 97),2px 2px 10px rgb(102, 97, 97);
+        }
+        #output {  
+            margin: 0 auto;
+            width: 400px;
+            height: 260px;
+            padding:20px; 
+            border:1px solid; 
+            background:#ccc; 
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="camset">
+        
+        <!-- Camera Location -->
+        <div id="location"></div>
+
+        <!-- Snap Button -->
+        <div class="Snapshot">
+            <button onClick="take_snapshot()">Take Snapshot</button> 
+        </div>
+
+        <!-- Result -->
+        <div id="output" ></div>
+
+    </div>
+    <script>
+        Webcam.set({
+            width: 400,
+            height: 260,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+        Webcam.attach( '#location' );
+        
+        function take_snapshot() {         
+        Webcam.snap( function(data_uri) {
+            document.querySelector('#output').innerHTML = 
+            `<img src="'${data_uri}'"/>`;
+            } );
+        }
+    </script>        
+</body>
+</html>
